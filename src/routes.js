@@ -13,10 +13,18 @@ const profile = {
 }
 
 
+const jobs = []
+ 
+
 // Rotas 
 routes.get('/', (req, res) => res.render(`${views}/index`))
 
 routes.get('/job', (req, res) => res.render(`${views}/job`))
+routes.post('/job', (req, res) => {
+    jobs.push(req.body)
+    return res.redirect('/')
+})
+
 
 routes.get('/job/edit', (req, res) => res.render(`${views}/job`))
 
