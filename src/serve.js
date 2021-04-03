@@ -2,6 +2,9 @@ const express = require('express')
 const serve = express()
 const routes = require('./routes')
 
+// Tamplete Engine EJS embutindo JS em HTML
+serve.set('view engine', 'ejs')
+
 // Habilitando arquivos estaticos
 serve.use(express.static("public"))
 
