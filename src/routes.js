@@ -107,11 +107,19 @@ const Job = {
     }
 }
 
+const JobEdit = {
+    controllers: {
+        updateJob(req, res) {
+            return res.render(`${views}/job`)
+        }
+    }
+}
+
 // Rotas 
 routes.get('/', Job.controllers.index)
 routes.get('/job', Job.controllers.create)
 routes.post('/job', Job.controllers.save)
-routes.get('/job/edit', (req, res) => res.render(`${views}/job`))
+routes.get('/job/edit', JobEdit.controllers.updateJob)
 routes.get('/profile', Profile.controllers.index)
 
 
