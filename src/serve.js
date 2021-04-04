@@ -14,5 +14,6 @@ serve.use(express.urlencoded({ extended: true }))
 // Rotas
 serve.use(routes)
 
+const link = 'http://localhost:3000'
 const PORT = 3000
-serve.listen(PORT, () => console.log(`Servidor iniciado na porta ${PORT}`))
+serve.listen(PORT, () => console.log(`Servidor iniciado na porta ${PORT} - ${link}`))

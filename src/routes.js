@@ -23,7 +23,6 @@ const Profile = {
     }
 }
 
-
 const Job = {
     data: [
         {
