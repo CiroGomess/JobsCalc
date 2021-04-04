@@ -81,15 +81,24 @@
         <% jobs.forEach((job)=>{ %>
 
           <div class="card <%= job.status %> " data-id="<%= job.id  %> ">
-            <div class="id column">1</div>
+            <div class="id column">
+              <%= job.id %>
+            </div>
             <div class="name column">
               <%= job.name %>
             </div>
             <div class="deadline column">
               <span>Prazo</span>
               <p>
-                <%= job.remaining %>
-                dias para a entrega
+
+                <% if(job.status==='progress' ){ %>
+                  <%= job.remaining %>dias para a entrega
+
+
+                    <%}else{ %>
+                      Prazo encerrado
+                      <%} %>
+
               </p>
             </div>
             <div class="amount column">
