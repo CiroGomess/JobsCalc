@@ -19,19 +19,21 @@ const Profile = {
         },
         update(req, res) {
             //req para pegar os dados 
-            const data = req.body   
+            const data = req.body
             // definir quantos  semanas tem no ano
-            const  weekPerYear = 52
+            const weekPerYear = 52
             // remover as semanas de ferias do ano, pegar quantas  semanas tem em 1 mês 
             const weekPerMonth = (weekPerYear - data["vacation-per-year"]) / 12
             // quantas  horas por semana estou trabalhando 
             const weekTotalHours = data["hours-per-day"] * data["days-per-week"]
             // total de horas trabalhadas no mes 
-            const monthlyTotalHours =  weekTotalHours * weekPerMonth
+            const monthlyTotalHours = weekTotalHours * weekPerMonth
             // qual será o valor da minha hora 
-            const valuerHours = data["value-hour"] = data["monthly-budget"] / monthlyTotalHours
+            const valuerHours = (data["value-hour"] = data["monthly-budget"] / monthlyTotalHours).toFixed(2).replace(".",",")
 
-            Profile.data ={
+            console.log(`Valor da hora: R$${valuerHours}`);
+
+            Profile.data = {
                 ...Profile.data,
                 ...req.body,
                 'value-hour': valuerHours
