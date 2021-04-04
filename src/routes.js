@@ -18,6 +18,27 @@ const Profile = {
             return res.render(`${views}/profile`, { profile: Profile.data })
         },
         update(req, res) {
+            //req para pegar os dados 
+            const data = req.body   
+            // definir quantos  semanas tem no ano
+            const  weekPerYear = 52
+            // remover as semanas de ferias do ano, pegar quantas  semanas tem em 1 mês 
+            const weekPerMonth = (weekPerYear - data["vacation-per-year"]) / 12
+            // quantas  horas por semana estou trabalhando 
+            const weekTotalHours = data["hours-per-day"] * data["days-per-week"]
+            // total de horas trabalhadas no mes 
+            const monthlyTotalHours =  weekTotalHours * weekPerMonth
+            // qual será o valor da minha hora 
+            const valuerHours = data["value-hour"] = data["monthly-budget"] / monthlyTotalHours
+
+            Profile.data ={
+                ...Profile.data,
+                ...req.body,
+                'value-hour': valuerHours
+            }
+
+            return res.redirect('/profile')
+
 
         }
     }
@@ -120,6 +141,7 @@ routes.get('/job', Job.controllers.create)
 routes.post('/job', Job.controllers.save)
 routes.get('/job/edit', JobEdit.controllers.updateJob)
 routes.get('/profile', Profile.controllers.index)
+routes.post('/profile', Profile.controllers.update)
 
 
 // compartilhando as rotas com outros arquivos
